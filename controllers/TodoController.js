@@ -33,12 +33,13 @@ class TodoController {
     }
 
     static create(req, res) {
-        let { title, description, status, due_date } = req.body
+        let { title, description, status, due_date, userId } = req.body
         let newdata = {
             title,
             description,
             status,
-            due_date
+            due_date,
+            userId
         }
         Todo.create(newdata)
             .then(data => {
@@ -55,12 +56,13 @@ class TodoController {
 
     static update(req, res) {
         let id = +req.params.id
-        let { title, description, status, due_date } = req.body
+        let { title, description, status, due_date, userId } = req.body
         let updatedData = {
             title,
             description,
             status,
-            due_date
+            due_date,
+            userId
         }
 
         Todo.findOne({ where: { id: id } })
