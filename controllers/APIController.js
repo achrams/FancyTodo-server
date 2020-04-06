@@ -8,9 +8,10 @@ class APIController {
             .then((result) => {
                 let data = result.data
                 return res.status(200).json({
-                    cities: data
+                    data
                 })
-            }).catch((err) => {
+            })
+            .catch((err) => {
                 return next(err)
             });
     }

@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
         hooks: {
             beforeCreate(todo, option) {
                 todo.status = todo.status || 'Undone'
+                todo.createdAt = new Date()
+                todo.updatedAt = new Date()
             }
         },
         sequelize

@@ -8,7 +8,7 @@ router.use(authentication)
 router.get('/', TodoController.findAll)
 router.post('/', TodoController.create)
 router.get('/:id', TodoController.findOne)
-router.put('/:id', TodoController.update)
+router.put('/:id', authorization, TodoController.update)
 router.delete('/:id', authorization, TodoController.delete)
 
 module.exports = router
