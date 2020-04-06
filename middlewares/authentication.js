@@ -13,7 +13,7 @@ const authentication = (req, res, next) => {
             .then(result => {
                 if (result) {
                     req.currentUserId = result.id
-                    next()
+                    return next()
                 } else {
                     return res.status(404).json({
                         name: "Not Found",
