@@ -6,15 +6,17 @@ function authorization(req, res, next) {
                 id: req.params.id
             }
         })
-        .then(result => {
-            if (result) {
-                if (result.userId == req.currentUserId) {
-                    return next()
-                }
+        .then((result) => {
+            // console.log(result);
+            let res_id = result.UserId
+                // console.log('currentuserid: ' + req.currentUserId);
+                // console.log('resid :' + res_id)
+            if (res_id == req.currentUserId) {
+                next()
             } else {
-                return res.status(404).json({
-                    name: "Not Found",
-                    errors: "User Not Found"
+                return res.status(401).json({
+                    name: "BadRequest",
+                    errors: "Unauthorized"
                 })
             }
         })

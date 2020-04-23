@@ -60,6 +60,7 @@ class TodoController {
     }
 
     static update(req, res) {
+        console.log('update');
         let id = +req.params.id
         let { title, description, status, due_date, userId } = req.body
         let updatedData = {
@@ -70,18 +71,10 @@ class TodoController {
             userId
         }
 
-        Todo.findOne({ where: { id: id } })
-            .then(result => {
-                if (!result) res.status(404).json({
-                    "type": "Error",
-                    "msg": "Data not found"
-                })
-                else {
-                    Todo.update(updatedData, { where: { id: result.id } })
-                        .then(updated => {
-                            res.status(200).json({ updatedData })
-                        })
-                }
+        Todo.update(updatedData, { where: { id: id } })
+            .then(updated => {
+                console.log('berhasil');
+                res.status(200).json({ updatedData })
             })
             .catch(err => {
                 res.status(500).json({

@@ -4,7 +4,7 @@ const { User } = require('../models')
 const authentication = (req, res, next) => {
     try {
         const decoded = verification(req.headers.access_token)
-        console.log(decoded)
+            // console.log(decoded)
         User.findOne({
                 where: {
                     id: decoded.id
@@ -12,8 +12,9 @@ const authentication = (req, res, next) => {
             })
             .then(result => {
                 if (result) {
+                    // console.log('result id :' + result.id);
                     req.currentUserId = result.id
-                    return next()
+                    next()
                 } else {
                     return res.status(404).json({
                         name: "Not Found",
